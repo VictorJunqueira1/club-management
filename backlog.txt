@@ -1,0 +1,38 @@
+Front-End:
+
+1. Autenticação
+✅ Login
+✅ Identificação dos papéis
+
+❌ Criar e-mails pré-definidos: 
+E-mail Diretoria: diretoriahomeadventure@gmail.com
+Senha Diretoria: diretoria@gestao
+
+E-mail Responsável: responsavelhomeadventure@gmail.com
+Senha Responsável: responsavel@home
+
+2. Funcionalidades por Papel
+
+Responsável:
+❌ Acesso: Apenas visualização dos acontecimentos do clube
+❌ Funcionalidades: Pode visualizar as atividades e lista de unidades.
+
+Diretoria: 
+❌ Acesso: Pode visualizar, editar e criar novas atividades e unidades
+
+Funcionalidades Atividades:
+❌ Cadastro e Atualização de Atividades (Dia, Dia da Semana (gerado automaticamente após preencher o Dia), Oficial do Dia, Atividades Realizadas, Eventos Paralelos)
+❌ Operações Permitidas: Adicionar, Editar e Excluir
+
+Funcionalidades Gestão de Unidades:
+❌ Formulário de Cadastro e Atualização de Unidades (Nome da Unidades, Idade, Gênero, Conselheiros e Instrutores)
+❌ Operações Permitidas: Adicionar, Editar e Excluir
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Back-End:
+
+1. Autenticação
+❌ Criar e-mail pré-definidos para ambos os papéis
+
+❌ Identificação dos papéis
