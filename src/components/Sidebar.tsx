@@ -1,14 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Users, NotepadText, Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useUser } from '@/context/UserContext';
 
-const Sidebar: React.FC = () => {
-    const { userRole } = useUser();
+const Aside = () => {
     const router = useRouter();
     const { pathname } = router;
-    const [isSheetOpen, setIsSheetOpen] = React.useState(false);
+    const [isSheetOpen, setIsSheetOpen] = useState(false);
 
     const toggleSheet = () => {
         setIsSheetOpen(!isSheetOpen);
@@ -18,9 +16,7 @@ const Sidebar: React.FC = () => {
         <>
             {/* Desktop and tablet view */}
             <aside className="hidden lg:flex lg:flex-col lg:w-80 lg:bg-white lg:p-6 lg:shadow-lg lg:rounded-r-sm lg:fixed lg:left-0 lg:top-0 lg:h-full lg:z-30">
-                <h2 className="text-2xl font-bold text-black mb-4">
-                    {userRole === 'director' ? 'Olá, Diretoria!' : 'Olá, Responsável!'}
-                </h2>
+                <h2 className="text-2xl font-bold text-black mb-4">Olá, Diretoria!</h2>
                 <nav>
                     <ul className="space-y-4">
                         <li className='hover:scale-105 duration-300'>
@@ -57,9 +53,7 @@ const Sidebar: React.FC = () => {
                 >
                     <X className="w-6 h-6" />
                 </button>
-                <h2 className="text-2xl font-bold mb-6 text-black">
-                    {userRole === 'director' ? 'Olá, Diretoria!' : 'Olá, Responsável!'}
-                </h2>
+                <h2 className="text-2xl font-bold mb-6 text-black"></h2>
                 <nav>
                     <ul className="space-y-4">
                         <li className='hover:scale-105 transform transition-transform duration-300'>
@@ -99,4 +93,4 @@ const Sidebar: React.FC = () => {
     );
 };
 
-export default Sidebar;
+export default Aside;
