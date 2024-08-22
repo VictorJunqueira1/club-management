@@ -17,6 +17,14 @@ const DiretorPainel = () => {
             description: "Descrição do evento passado.",
             isFree: false,
         },
+        {
+            date: "10 Jun",
+            time: "09:00",
+            location: "Escola Almerinda",
+            title: "Evento Antigo",
+            description: "Descrição do evento passado.",
+            isFree: false,
+        },
     ];
 
     const upcomingEvents = [
@@ -68,22 +76,6 @@ const DiretorPainel = () => {
             description: "Venha ajudar em um dia de voluntariado para apoiar a nossa comunidade. Serão realizadas várias atividades beneficentes.",
             isFree: true,
         },
-        {
-            date: "19 Ago",
-            time: "13:00",
-            location: "Parque Central",
-            title: "Competição de Esportes",
-            description: "Participe da competição anual de esportes no parque. Haverá várias modalidades e prêmios para os vencedores!",
-            isFree: false,
-        },
-        {
-            date: "26 Ago",
-            time: "11:00",
-            location: "Centro Comunitário",
-            title: "Festa de Encerramento de Verão",
-            description: "Vamos celebrar o final do verão com uma festa no centro comunitário. Música, comida e diversão garantidos!",
-            isFree: true,
-        },
     ];
 
     return (
@@ -93,7 +85,7 @@ const DiretorPainel = () => {
                 <div className="max-w-7xl mx-auto flex-grow w-full">
                     <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
                         {/* Seção do Calendário e Eventos Passados */}
-                        <div className="col-span-1 xl:col-span-1 flex flex-col gap-6">
+                        <div className="flex flex-col gap-6">
                             <div className="flex-grow flex flex-col">
                                 <div className="flex-grow">
                                     <Calendar

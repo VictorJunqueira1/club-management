@@ -19,7 +19,7 @@ const EventCard: React.FC<EventCardProps> = ({ date, time, location, title, desc
                     <p className="text-gray-500">{time}</p>
                     {isFree && <p className="text-blue-500">Grátis</p>}
                 </div>
-                <div className="flex-grow border-l-2 border-blue-500 pl-4">
+                <div className="flex-grow border-l-4 border-blue-500 pl-4">
                     <a href="#" className="text-blue-500 hover:underline flex items-center gap-1"><MapPin className='h-4 w-4' /> {location}</a>
                     <h3 className="text-lg font-semibold mt-1">{title}</h3>
                     <p className="text-gray-600 mt-1">{description}</p>

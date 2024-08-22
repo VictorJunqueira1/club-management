@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
 import EventCard from './EventCard';
+import {
+    Pagination,
+    PaginationContent,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious,
+} from "@/components/ui/pagination"
 
 type EventListProps = {
     events: {
@@ -15,14 +23,16 @@ type EventListProps = {
 const EventList: React.FC<EventListProps> = ({ events }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const eventsPerPage = 3;
-    const totalEvents = events.length;
+    const totalPages = Math.ceil(events.length / eventsPerPage);
 
     const indexOfLastEvent = currentPage * eventsPerPage;
     const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
     const currentEvents = events.slice(indexOfFirstEvent, indexOfLastEvent);
 
     const handlePageChange = (pageNumber: number) => {
-        setCurrentPage(pageNumber);
+        if (pageNumber >= 1 && pageNumber <= totalPages) {
+            setCurrentPage(pageNumber);
+        }
     };
 
     return (
@@ -41,15 +51,32 @@ const EventList: React.FC<EventListProps> = ({ events }) => {
                 ))}
             </div>
             <div className="flex justify-center mt-4">
-                {Array.from({ length: Math.ceil(totalEvents / eventsPerPage) }, (_, index) => (
-                    <button
-                        key={index}
-                        onClick={() => handlePageChange(index + 1)}
-                        className={`px-3 py-1 mx-1 rounded-md ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700'} transition-colors`}
+                <Pagination>
+                    <PaginationPrevious
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        className={currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""}
                     >
-                        {index + 1}
-                    </button>
-                ))}
+                        Voltar
+                    </PaginationPrevious>
+                    <PaginationContent>
+                        {Array.from({ length: totalPages }).map((_, index) => (
+                            <PaginationItem key={index}>
+                                <PaginationLink
+                                    onClick={() => handlePageChange(index + 1)}
+                                    isActive={currentPage === index + 1}
+                                >
+                                    {index + 1}
+                                </PaginationLink>
+                            </PaginationItem>
+                        ))}
+                    </PaginationContent>
+                    <PaginationNext
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        className={currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""}
+                    >
+                        Próximo
+                    </PaginationNext>
+                </Pagination>
             </div>
         </div>
     );

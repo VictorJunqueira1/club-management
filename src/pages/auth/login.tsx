@@ -113,7 +113,7 @@ const Login: React.FC = () => {
 
             {/* Right side: Desbravadores Symbol */}
             <motion.div
-                className="hidden lg:flex lg:flex-2 lg:bg-blue-600 lg:items-center lg:justify-center lg:p-12"
+                className="hidden lg:flex lg:flex-2 lg:bg-orange-600 lg:items-center lg:justify-center lg:p-12"
                 initial={{ opacity: 0, x: 100 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
