@@ -10,21 +10,13 @@ const DiretorPainel = () => {
 
     const pastEvents = [
         {
-            date: "1 Jun",
-            time: "14:00",
+            date: "4 Jul",
+            time: "08:00",
             location: "Escola Almerinda",
-            title: "Evento Antigo",
-            description: "Descrição do evento passado.",
-            isFree: false,
-        },
-        {
-            date: "10 Jun",
-            time: "09:00",
-            location: "Escola Almerinda",
-            title: "Evento Antigo",
-            description: "Descrição do evento passado.",
-            isFree: false,
-        },
+            title: "Encontro do Clube de Desbravadores",
+            description: "Participe do encontro mensal do clube. Vamos discutir as atividades planejadas e fazer novas amizades.",
+            isFree: true,
+        }
     ];
 
     const upcomingEvents = [
@@ -61,52 +53,40 @@ const DiretorPainel = () => {
             isFree: true,
         },
         {
-            date: "5 Ago",
-            time: "16:00",
-            location: "Auditório Municipal",
-            title: "Palestra sobre Liderança",
-            description: "Participe de uma palestra inspiradora sobre liderança e como ser um líder eficaz em sua comunidade.",
-            isFree: true,
-        },
-        {
-            date: "12 Ago",
+            date: "8 Jul",
             time: "09:00",
             location: "Escola Almerinda",
-            title: "Dia de Voluntariado",
-            description: "Venha ajudar em um dia de voluntariado para apoiar a nossa comunidade. Serão realizadas várias atividades beneficentes.",
+            title: "Encontro do Clube de Desbravadores",
+            description: "Participe do encontro mensal do clube. Vamos discutir as atividades planejadas e fazer novas amizades.",
             isFree: true,
         },
     ];
 
     return (
         <>
-            <main className="mt-[500px] md:mt-0 flex flex-col lg:flex-row items-start justify-center p-6 lg:p-12 h-screen text-gray-800 lg:ml-80">
-                {/* Sidebar permanece visível apenas em telas maiores */}
+            <main className="flex flex-col lg:flex-row items-start justify-center p-6 lg:p-12 min-h-screen text-gray-800 lg:ml-80">
                 <Sidebar />
-
                 {/* Conteúdo principal */}
                 <div className="max-w-7xl mx-auto flex-grow w-full">
-                    <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-                        {/* Seção do Calendário e Eventos Passados */}
-                        <div className="flex flex-col gap-6">
-                            <div className="flex-grow flex flex-col">
-                                <div className="flex-grow">
-                                    <Calendar
-                                        mode="single"
-                                        selected={date}
-                                        onSelect={setDate}
-                                        className="w-full rounded-md border"
-                                        locale={pt}
-                                    />
-                                </div>
-                                <div className="mt-6">
+                    <div className="grid grid-cols-1 xl:grid-cols-3 gap-2">
+                        {/* Seção do Calendário */}
+                        <div className="flex flex-col justify-between h-full">
+                            <div className="flex flex-col h-full">
+                                <Calendar
+                                    mode="single"
+                                    selected={date}
+                                    onSelect={setDate}
+                                    className="w-full rounded-md border"
+                                    locale={pt}
+                                />
+                                {/* Seção de Eventos Passados */}
+                                <div>
                                     <PastEvents events={pastEvents} />
                                 </div>
                             </div>
                         </div>
-
                         {/* Seção de Próximos Eventos */}
-                        <div className="col-span-1 xl:col-span-2 bg-white p-6 rounded-lg border">
+                        <div className="col-span-1 xl:col-span-2 bg-white p-6 border rounded-md">
                             <h2 className="text-xl font-semibold mb-4">Próximos Eventos</h2>
                             <EventList events={upcomingEvents} />
                         </div>

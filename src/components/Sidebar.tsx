@@ -52,7 +52,7 @@ const Aside = () => {
                 >
                     <X className="w-6 h-6" />
                 </button>
-                <h2 className="text-2xl font-bold mb-6 text-black">Menu</h2>
+                <h2 className="text-2xl font-bold mb-6 text-black"></h2>
                 <nav>
                     <ul className="space-y-4">
                         <li className='hover:scale-105 duration-300'>
