@@ -23,7 +23,7 @@ type EventListProps = {
 const EventList: React.FC<EventListProps> = ({ events }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [isMobile, setIsMobile] = useState(false);
-    const eventsPerPage = 3;
+    const eventsPerPage = 4;
     const totalPages = Math.ceil(events.length / eventsPerPage);
 
     const indexOfLastEvent = currentPage * eventsPerPage;

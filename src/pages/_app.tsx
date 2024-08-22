@@ -1,6 +1,14 @@
-import type { AppProps } from 'next/app'
+import React from 'react';
+import { AppProps } from 'next/app';
+import { UserProvider } from '@/context/UserContext';
 import "@/app/globals.css"
- 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
-}
+
+const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
+  return (
+    <UserProvider>
+      <Component {...pageProps} />
+    </UserProvider>
+  );
+};
+
+export default MyApp;
