@@ -16,7 +16,6 @@ type EventListProps = {
         location: string;
         title: string;
         description: string;
-        isFree: boolean;
     }[];
 };
 
@@ -88,7 +87,6 @@ const EventList: React.FC<EventListProps> = ({ events }) => {
                         location={event.location}
                         title={event.title}
                         description={event.description}
-                        isFree={event.isFree}
                     />
                 ))}
             </div>

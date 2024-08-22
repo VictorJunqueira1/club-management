@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Users, NotepadText, Menu, X } from 'lucide-react';
+import { Users, NotepadText, LayoutDashboard, X, Menu } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -21,18 +21,18 @@ const Aside = () => {
                     <ul className="space-y-4">
                         <li className='hover:scale-105 duration-300'>
                             <Link href="/" className={`flex items-center p-3 rounded-md transition-colors hover:bg-blue-100 ${pathname === '/' ? 'bg-blue-200 text-black' : 'text-black'}`}>
-                                <Menu className="w-6 h-6 mr-3 text-blue-500" />
+                                <LayoutDashboard className="w-6 h-6 mr-3 text-blue-500" />
                                 <span className="text-lg font-medium">Início</span>
                             </Link>
                         </li>
                         <li className='hover:scale-105 duration-300'>
-                            <Link href="/activities" className={`flex items-center p-3 rounded-md transition-colors hover:bg-blue-100 ${pathname === '/activities' ? 'bg-blue-200 text-black' : 'text-black'}`}>
+                            <Link href="/modules/activities" className={`flex items-center p-3 rounded-md transition-colors hover:bg-blue-100 ${pathname === '/modules/activities' ? 'bg-blue-200 text-black' : 'text-black'}`}>
                                 <NotepadText className="w-6 h-6 mr-3 text-blue-500" />
                                 <span className="text-lg font-medium">Atividades</span>
                             </Link>
                         </li>
                         <li className='hover:scale-105 duration-300'>
-                            <Link href="/units" className={`flex items-center p-3 rounded-md transition-colors hover:bg-blue-100 ${pathname === '/units' ? 'bg-blue-200 text-black' : 'text-black'}`}>
+                            <Link href="/modules/units" className={`flex items-center p-3 rounded-md transition-colors hover:bg-blue-100 ${pathname === '/modules/units' ? 'bg-blue-200 text-black' : 'text-black'}`}>
                                 <Users className="w-6 h-6 mr-3 text-blue-500" />
                                 <span className="text-lg font-medium">Unidades</span>
                             </Link>
@@ -58,18 +58,18 @@ const Aside = () => {
                     <ul className="space-y-4">
                         <li className='hover:scale-105 transform transition-transform duration-300'>
                             <Link href="/" className={`flex items-center p-3 rounded-md transition-colors hover:bg-blue-100 ${pathname === '/' ? 'bg-blue-200 text-black' : 'text-black'}`}>
-                                <Menu className="w-6 h-6 mr-3 text-blue-500" />
+                                <LayoutDashboard className="w-6 h-6 mr-3 text-blue-500" />
                                 <span className="text-lg font-medium">Início</span>
                             </Link>
                         </li>
                         <li className='hover:scale-105 transform transition-transform duration-300'>
-                            <Link href="/activities" className={`flex items-center p-3 rounded-md transition-colors hover:bg-blue-100 ${pathname === '/activities' ? 'bg-blue-200 text-black' : 'text-black'}`}>
+                            <Link href="/activities" className={`flex items-center p-3 rounded-md transition-colors hover:bg-blue-100 ${pathname === '/modules/activities' ? 'bg-blue-200 text-black' : 'text-black'}`}>
                                 <NotepadText className="w-6 h-6 mr-3 text-blue-500" />
                                 <span className="text-lg font-medium">Atividades</span>
                             </Link>
                         </li>
                         <li className='hover:scale-105 transform transition-transform duration-300'>
-                            <Link href="/units" className={`flex items-center p-3 rounded-md transition-colors hover:bg-blue-100 ${pathname === '/units' ? 'bg-blue-200 text-black' : 'text-black'}`}>
+                            <Link href="/units" className={`flex items-center p-3 rounded-md transition-colors hover:bg-blue-100 ${pathname === '/modules/units' ? 'bg-blue-200 text-black' : 'text-black'}`}>
                                 <Users className="w-6 h-6 mr-3 text-blue-500" />
                                 <span className="text-lg font-medium">Unidades</span>
                             </Link>

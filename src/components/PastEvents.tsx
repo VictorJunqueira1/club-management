@@ -8,7 +8,6 @@ interface PastEventsProps {
         location: string;
         title: string;
         description: string;
-        isFree: boolean;
     }[];
 }
 
@@ -27,7 +26,6 @@ const PastEvents: React.FC<PastEventsProps> = ({ events }) => {
                         location={event.location}
                         title={event.title}
                         description={event.description}
-                        isFree={event.isFree}
                     />
                 ))
             )}
