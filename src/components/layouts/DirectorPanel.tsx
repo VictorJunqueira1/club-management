@@ -80,8 +80,11 @@ const DiretorPainel = () => {
 
     return (
         <>
-            <main className="flex lg:pl-8 items-start justify-center flex-col lg:flex-row p-6 lg:p-12 h-screen text-gray-800 lg:ml-80">
+            <main className="mt-[500px] md:mt-0 flex flex-col lg:flex-row items-start justify-center p-6 lg:p-12 h-screen text-gray-800 lg:ml-80">
+                {/* Sidebar permanece visível apenas em telas maiores */}
                 <Sidebar />
+
+                {/* Conteúdo principal */}
                 <div className="max-w-7xl mx-auto flex-grow w-full">
                     <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
                         {/* Seção do Calendário e Eventos Passados */}
