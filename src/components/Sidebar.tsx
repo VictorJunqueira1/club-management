@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Users, NotepadText, LayoutDashboard, X, Menu, Book } from 'lucide-react';
+import { Users, NotepadText, LayoutDashboard, X, Menu, Album } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -39,7 +39,7 @@ const Aside = () => {
                         </li>
                         <li className='hover:scale-105 duration-300'>
                             <Link href="/modules/instructors" className={`flex items-center p-3 rounded-md transition-colors hover:bg-blue-100 ${pathname === '/modules/instructors' ? 'bg-blue-200 text-black' : 'text-black'}`}>
-                                <Book className="w-6 h-6 mr-3 text-blue-500" />
+                                <Album className="w-6 h-6 mr-3 text-blue-500" />
                                 <span className="text-lg font-medium">Classes</span>
                             </Link>
                         </li>
@@ -82,7 +82,7 @@ const Aside = () => {
                         </li>
                         <li className='hover:scale-105 transform transition-transform duration-300'>
                             <Link href="/modules/instructors" className={`flex items-center p-3 rounded-md transition-colors hover:bg-blue-100 ${pathname === '/modules/instructors' ? 'bg-blue-200 text-black' : 'text-black'}`}>
-                                <Book className="w-6 h-6 mr-3 text-blue-500" />
+                                <Album className="w-6 h-6 mr-3 text-blue-500" />
                                 <span className="text-lg font-medium">Classes</span>
                             </Link>
                         </li>
