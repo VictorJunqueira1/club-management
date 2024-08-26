@@ -63,13 +63,13 @@ const Aside = () => {
                             </Link>
                         </li>
                         <li className='hover:scale-105 transform transition-transform duration-300'>
-                            <Link href="/activities" className={`flex items-center p-3 rounded-md transition-colors hover:bg-blue-100 ${pathname === '/modules/activities' ? 'bg-blue-200 text-black' : 'text-black'}`}>
+                            <Link href="/modules/activities" className={`flex items-center p-3 rounded-md transition-colors hover:bg-blue-100 ${pathname === '/modules/activities' ? 'bg-blue-200 text-black' : 'text-black'}`}>
                                 <NotepadText className="w-6 h-6 mr-3 text-blue-500" />
                                 <span className="text-lg font-medium">Atividades</span>
                             </Link>
                         </li>
                         <li className='hover:scale-105 transform transition-transform duration-300'>
-                            <Link href="/units" className={`flex items-center p-3 rounded-md transition-colors hover:bg-blue-100 ${pathname === '/modules/units' ? 'bg-blue-200 text-black' : 'text-black'}`}>
+                            <Link href="/modules/units" className={`flex items-center p-3 rounded-md transition-colors hover:bg-blue-100 ${pathname === '/modules/units' ? 'bg-blue-200 text-black' : 'text-black'}`}>
                                 <Users className="w-6 h-6 mr-3 text-blue-500" />
                                 <span className="text-lg font-medium">Unidades</span>
                             </Link>

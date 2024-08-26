@@ -15,6 +15,7 @@ const DiretorPainel = () => {
             location: "Escola Almerinda",
             title: "Encontro do Clube de Desbravadores",
             description: "Participe do encontro mensal do clube. Vamos discutir as atividades planejadas e fazer novas amizades.",
+            officialDay: "Noely"
         }
     ];
 
@@ -25,6 +26,7 @@ const DiretorPainel = () => {
             location: "Escola Almerinda",
             title: "Encontro do Clube de Desbravadores",
             description: "Participe do encontro mensal do clube. Vamos discutir as atividades planejadas e fazer novas amizades.",
+            officialDay: "Jhonny"
         },
         {
             date: "15 Jul",
@@ -32,6 +34,7 @@ const DiretorPainel = () => {
             location: "Parque Central",
             title: "Atividade ao Ar Livre",
             description: "Junte-se a nós para uma tarde de atividades ao ar livre e diversão no parque. Traga sua família e amigos!",
+            officialDay: "Victor"
         },
         {
             date: "22 Jul",
@@ -39,6 +42,7 @@ const DiretorPainel = () => {
             location: "Centro Comunitário",
             title: "Workshop de Habilidades",
             description: "Oferecemos um workshop para desenvolver novas habilidades e aprender coisas novas. Não perca essa oportunidade!",
+            officialDay: "Michelle"
         },
         {
             date: "29 Jul",
@@ -46,6 +50,7 @@ const DiretorPainel = () => {
             location: "Escola Almerinda",
             title: "Reunião de Planejamento",
             description: "Reunião para planejar as próximas atividades do clube. Sua participação é fundamental para o sucesso dos eventos futuros.",
+            officialDay: "Lucão"
         },
         {
             date: "8 Jul",
@@ -53,6 +58,7 @@ const DiretorPainel = () => {
             location: "Escola Almerinda",
             title: "Encontro do Clube de Desbravadores",
             description: "Participe do encontro mensal do clube. Vamos discutir as atividades planejadas e fazer novas amizades.",
+            officialDay: "Abimael"
         },
     ];
 

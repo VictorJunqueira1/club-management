@@ -8,6 +8,7 @@ interface PastEventsProps {
         location: string;
         title: string;
         description: string;
+        officialDay: string
     }[];
 }
 
@@ -26,6 +27,7 @@ const PastEvents: React.FC<PastEventsProps> = ({ events }) => {
                         location={event.location}
                         title={event.title}
                         description={event.description}
+                        officialDay={event.officialDay}
                     />
                 ))
             )}

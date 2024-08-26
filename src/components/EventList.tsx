@@ -11,6 +11,7 @@ import {
 
 type EventListProps = {
     events: {
+        [x: string]: string;
         date: string;
         time: string;
         location: string;
@@ -34,7 +35,7 @@ const EventList: React.FC<EventListProps> = ({ events }) => {
             setIsMobile(window.innerWidth < 768);
         };
 
-        handleResize(); // Check on initial render
+        handleResize();
         window.addEventListener('resize', handleResize);
 
         return () => window.removeEventListener('resize', handleResize);
@@ -87,6 +88,7 @@ const EventList: React.FC<EventListProps> = ({ events }) => {
                         location={event.location}
                         title={event.title}
                         description={event.description}
+                        officialDay={event.officialDay || ''}
                     />
                 ))}
             </div>
