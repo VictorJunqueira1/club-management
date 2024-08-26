@@ -11,7 +11,7 @@ import {
 
 type EventListProps = {
     events: {
-        [x: string]: string;
+        officialDay: string;
         date: string;
         time: string;
         location: string;
@@ -23,7 +23,7 @@ type EventListProps = {
 const EventList: React.FC<EventListProps> = ({ events }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [isMobile, setIsMobile] = useState(false);
-    const eventsPerPage = 4;
+    const eventsPerPage = 3;
     const totalPages = Math.ceil(events.length / eventsPerPage);
 
     const indexOfLastEvent = currentPage * eventsPerPage;
