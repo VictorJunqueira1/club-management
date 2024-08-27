@@ -5,7 +5,7 @@ import EventList from "@/components/EventList";
 import PastEvents from "@/components/PastEvents";
 import { pt } from "date-fns/locale";
 
-const DiretorPainel = () => {
+const DirectorPanel = () => {
     const [date, setDate] = useState<Date | undefined>(new Date());
 
     const pastEvents = [
@@ -97,4 +97,4 @@ const DiretorPainel = () => {
     );
 };
 
-export default DiretorPainel;
+export default DirectorPanel;

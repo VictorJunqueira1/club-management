@@ -74,7 +74,7 @@ const Units = () => {
 
     return (
         <>
-            <main className="flex flex-col lg:flex-row items-start justify-center p-6 lg:p-12 min-h-screen text-gray-800">
+            <main className="flex flex-col lg:flex-row items-start justify-center p-6 lg:pl-32 lg:pt-12 min-h-screen text-gray-800">
                 <Sidebar />
                 <div className="flex-grow max-w-7xl mx-auto w-full bg-white rounded-xl shadow-sm border overflow-hidden">
                     <div className="p-8">

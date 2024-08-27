@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
-import { Users, NotepadText, LayoutDashboard, X, Menu, Album } from 'lucide-react';
+import { Users, NotepadText, LayoutDashboard, X, Menu, Album, Calendar } from 'lucide-react';   
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+
+const getUserRole = () => {
+    return "diretor";
+};
 
 const Aside = () => {
     const router = useRouter();
     const { pathname } = router;
     const [isSheetOpen, setIsSheetOpen] = useState(false);
+    const userRole = getUserRole();
 
     const toggleSheet = () => {
         setIsSheetOpen(!isSheetOpen);
@@ -16,19 +21,13 @@ const Aside = () => {
         <>
             {/* Desktop and tablet view */}
             <aside className="hidden lg:flex lg:flex-col lg:w-80 lg:bg-white lg:p-6 lg:shadow-lg lg:rounded-r-sm lg:fixed lg:left-0 lg:top-0 lg:h-full lg:z-30">
-                <h2 className="text-2xl font-bold text-black mb-4">Olá, Diretoria!</h2>
+                <h2 className="text-2xl font-bold text-black mb-4">Olá, {userRole === 'diretor' ? 'Diretoria' : 'Responsável'}!</h2>
                 <nav>
                     <ul className="space-y-4">
                         <li className='hover:scale-105 duration-300'>
                             <Link href="/" className={`flex items-center p-3 rounded-md transition-colors hover:bg-blue-100 ${pathname === '/' ? 'bg-blue-200 text-black' : 'text-black'}`}>
                                 <LayoutDashboard className="w-6 h-6 mr-3 text-blue-500" />
                                 <span className="text-lg font-medium">Início</span>
-                            </Link>
-                        </li>
-                        <li className='hover:scale-105 duration-300'>
-                            <Link href="/modules/activities" className={`flex items-center p-3 rounded-md transition-colors hover:bg-blue-100 ${pathname === '/modules/activities' ? 'bg-blue-200 text-black' : 'text-black'}`}>
-                                <NotepadText className="w-6 h-6 mr-3 text-blue-500" />
-                                <span className="text-lg font-medium">Atividades</span>
                             </Link>
                         </li>
                         <li className='hover:scale-105 duration-300'>
@@ -43,6 +42,14 @@ const Aside = () => {
                                 <span className="text-lg font-medium">Classes</span>
                             </Link>
                         </li>
+                        {userRole === 'diretor' && (
+                            <li className='hover:scale-105 duration-300'>
+                                <Link href="/modules/events" className={`flex items-center p-3 rounded-md transition-colors hover:bg-blue-100 ${pathname === '/events' ? 'bg-blue-200 text-black' : 'text-black'}`}>
+                                    <Calendar className="w-6 h-6 mr-3 text-blue-500" />
+                                    <span className="text-lg font-medium">Eventos</span>
+                                </Link>
+                            </li>
+                        )}
                     </ul>
                 </nav>
                 <div className="mt-auto text-gray-500 text-sm text-center">
@@ -59,19 +66,13 @@ const Aside = () => {
                 >
                     <X className="w-6 h-6" />
                 </button>
-                <h2 className="text-2xl font-bold mb-6 text-black"></h2>
+                <h2 className="text-2xl font-bold mb-6 text-black">Olá, {userRole === 'diretor' ? 'Diretoria' : 'Responsável'}!</h2>
                 <nav>
                     <ul className="space-y-4">
                         <li className='hover:scale-105 transform transition-transform duration-300'>
                             <Link href="/" className={`flex items-center p-3 rounded-md transition-colors hover:bg-blue-100 ${pathname === '/' ? 'bg-blue-200 text-black' : 'text-black'}`}>
                                 <LayoutDashboard className="w-6 h-6 mr-3 text-blue-500" />
                                 <span className="text-lg font-medium">Início</span>
-                            </Link>
-                        </li>
-                        <li className='hover:scale-105 transform transition-transform duration-300'>
-                            <Link href="/modules/activities" className={`flex items-center p-3 rounded-md transition-colors hover:bg-blue-100 ${pathname === '/modules/activities' ? 'bg-blue-200 text-black' : 'text-black'}`}>
-                                <NotepadText className="w-6 h-6 mr-3 text-blue-500" />
-                                <span className="text-lg font-medium">Atividades</span>
                             </Link>
                         </li>
                         <li className='hover:scale-105 transform transition-transform duration-300'>
@@ -86,6 +87,14 @@ const Aside = () => {
                                 <span className="text-lg font-medium">Classes</span>
                             </Link>
                         </li>
+                        {userRole === 'diretor' && (
+                            <li className='hover:scale-105 transform transition-transform duration-300'>
+                                <Link href="/modules/events" className={`flex items-center p-3 rounded-md transition-colors hover:bg-blue-100 ${pathname === '/events' ? 'bg-blue-200 text-black' : 'text-black'}`}>
+                                    <Calendar className="w-6 h-6 mr-3 text-blue-500" />
+                                    <span className="text-lg font-medium">Eventos</span>
+                                </Link>
+                            </li>
+                        )}
                     </ul>
                 </nav>
                 <div className="mt-auto text-gray-500 text-sm text-center">

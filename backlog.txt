@@ -14,8 +14,8 @@ Unidades:
 ❌ Formulário para criar uma unidade
 ❌ Campos para criar uma unidade: Nome, idade, gênero, conselheiros e instrutores
 
-Criar Evento (para exibição na área inicial):
-❌ Formulário para criar um evento
+Criar Encontro (para exibição na área inicial):
+❌ Formulário para criar um encontro
 ❌ Campos para criar uma unidade: Dia, hora, gratuito, local, titulo, descrição
 
 ❌ Conforme a data passar, exibir em último evento substituindo o último.
