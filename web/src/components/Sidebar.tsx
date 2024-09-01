@@ -1,17 +1,44 @@
-import React, { useState } from 'react';
-import { Users, NotepadText, LayoutDashboard, X, Menu, Album, Calendar } from 'lucide-react';   
+import React, { useState, useEffect } from 'react';
+import { Users, LayoutDashboard, X, Menu, Album, Calendar } from 'lucide-react';   
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-const getUserRole = () => {
-    return "diretor";
+const fetchUserRole = async () => {
+    try {
+        const response = await fetch("http://localhost:3000/userRole", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            credentials: "include", // Inclui cookies na requisição, se necessário
+        });
+
+        if (!response.ok) {
+            throw new Error("Erro ao buscar o papel do usuário");
+        }
+
+        const data = await response.json();
+        return data.role; // Retorna o papel do usuário
+    } catch (error) {
+        console.error("Erro ao buscar o papel do usuário:", error);
+        return 'viewer'; // Define 'viewer' como padrão em caso de erro
+    }
 };
 
-const Aside = () => {
+const Aside: React.FC = () => {
     const router = useRouter();
     const { pathname } = router;
     const [isSheetOpen, setIsSheetOpen] = useState(false);
-    const userRole = getUserRole();
+    const [userRole, setUserRole] = useState<"director" | "viewer">('viewer'); // Define 'viewer' como padrão
+
+    useEffect(() => {
+        const getRole = async () => {
+            const role = await fetchUserRole();
+            setUserRole(role);
+        };
+
+        getRole();
+    }, []);
 
     const toggleSheet = () => {
         setIsSheetOpen(!isSheetOpen);
@@ -21,7 +48,7 @@ const Aside = () => {
         <>
             {/* Desktop and tablet view */}
             <aside className="hidden lg:flex lg:flex-col lg:w-80 lg:bg-white lg:p-6 lg:shadow-lg lg:rounded-r-sm lg:fixed lg:left-0 lg:top-0 lg:h-full lg:z-30">
-                <h2 className="text-2xl font-bold text-black mb-4">Olá, {userRole === 'diretor' ? 'Diretoria' : 'Responsável'}!</h2>
+                <h2 className="text-2xl font-bold text-black mb-4">Olá, {userRole === 'director' ? 'Diretoria' : 'Responsável'}!</h2>
                 <nav>
                     <ul className="space-y-4">
                         <li className='hover:scale-105 duration-300'>
@@ -42,7 +69,7 @@ const Aside = () => {
                                 <span className="text-lg font-medium">Classes</span>
                             </Link>
                         </li>
-                        {userRole === 'diretor' && (
+                        {userRole === 'director' && (
                             <li className='hover:scale-105 duration-300'>
                                 <Link href="/modules/events" className={`flex items-center p-3 rounded-md transition-colors hover:bg-blue-100 ${pathname === '/events' ? 'bg-blue-200 text-black' : 'text-black'}`}>
                                     <Calendar className="w-6 h-6 mr-3 text-blue-500" />
@@ -66,7 +93,7 @@ const Aside = () => {
                 >
                     <X className="w-6 h-6" />
                 </button>
-                <h2 className="text-2xl font-bold mb-6 text-black">Olá, {userRole === 'diretor' ? 'Diretoria' : 'Responsável'}!</h2>
+                <h2 className="text-2xl font-bold mb-6 text-black">Olá, {userRole === 'director' ? 'Diretoria' : 'Responsável'}!</h2>
                 <nav>
                     <ul className="space-y-4">
                         <li className='hover:scale-105 transform transition-transform duration-300'>
@@ -87,7 +114,7 @@ const Aside = () => {
                                 <span className="text-lg font-medium">Classes</span>
                             </Link>
                         </li>
-                        {userRole === 'diretor' && (
+                        {userRole === 'director' && (
                             <li className='hover:scale-105 transform transition-transform duration-300'>
                                 <Link href="/modules/events" className={`flex items-center p-3 rounded-md transition-colors hover:bg-blue-100 ${pathname === '/events' ? 'bg-blue-200 text-black' : 'text-black'}`}>
                                     <Calendar className="w-6 h-6 mr-3 text-blue-500" />

@@ -26,9 +26,3 @@ export const hashPassword = async (password: string) => {
 export const comparePassword = async (password: string, hashedPassword: string) => {
   return await bcrypt.compare(password, hashedPassword);
 };
-
-// Example of creating a new user
-export const registerUser = async (username: string, password: string, role: 'director' | 'user') => {
-  const hashedPassword = await hashPassword(password);
-  await createUser(username, hashedPassword, role);
-};

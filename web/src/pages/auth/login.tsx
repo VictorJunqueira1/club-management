@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { z } from "zod";
 import "@/app/globals.css";
@@ -9,13 +9,14 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation"; // Importação do useRouter
 import {
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from "@/components/ui/select"
+} from "@/components/ui/select";
 
 const formSchema = z.object({
     username: z.string().email("Email inválido").min(2, "Email é obrigatório"),
@@ -26,6 +27,7 @@ const formSchema = z.object({
 type FormSchemaType = z.infer<typeof formSchema>;
 
 const Login: React.FC = () => {
+    const router = useRouter(); // Inicializa o hook useRouter
     const form = useForm<FormSchemaType>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -37,6 +39,29 @@ const Login: React.FC = () => {
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         console.log(values);
+
+        // Fazendo a requisição para o backend
+        fetch("http://localhost:3000/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(values),
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Erro na requisição");
+                }
+                return response.json();
+            })
+            .then((data) => {
+                console.log("Login bem-sucedido:", data);
+                router.push("/");
+            })
+            .catch((error) => {
+                console.error("Erro durante o login:", error);
+                // Adicione aqui o tratamento de erros
+            });
     }
 
     return (
