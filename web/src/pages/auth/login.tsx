@@ -131,14 +131,14 @@ const Login: React.FC = () => {
                                 )}
                             />
                         </div>
-                        <Button type="submit" variant={"default"} className="py-5">Entrar</Button>
+                        <Button type="submit" variant={"default"} className="py-5 w-full mt-4">Entrar</Button>
                     </form>
                 </Form>
             </motion.div>
 
             {/* Right side: Desbravadores Symbol */}
             <motion.div
-                className="hidden lg:flex lg:flex-2 lg:bg-blue-600 lg:items-center lg:justify-center lg:p-12"
+                className="hidden lg:flex lg:flex-2 lg:bg-orange-600 lg:items-center lg:justify-center lg:p-12"
                 initial={{ opacity: 0, x: 100 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}

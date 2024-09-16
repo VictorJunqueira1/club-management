@@ -90,7 +90,7 @@ const Instructors = () => {
             ]
         },
         {
-            "classe": "Fanfara",
+            "classe": "Fanfarra",
             "responsavel": "Guilherme",
             "instrutores": [
                 "Noeli",
