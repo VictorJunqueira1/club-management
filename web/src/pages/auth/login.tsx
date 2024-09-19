@@ -39,7 +39,7 @@ const Login: React.FC = () => {
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         console.log(values);
-
+    
         // Fazendo a requisição para o backend
         fetch("http://localhost:3000/login", {
             method: "POST",
@@ -56,6 +56,14 @@ const Login: React.FC = () => {
             })
             .then((data) => {
                 console.log("Login bem-sucedido:", data);
+    
+                // Salva o token e o email no localStorage
+                localStorage.setItem('token', data.token);
+    
+                // Verifique se o backend retorna o email no login, caso contrário use o valor de "values.email"
+                localStorage.setItem('email', data.email || values.email); 
+    
+                // Redireciona o usuário após o login bem-sucedido
                 router.push("/");
             })
             .catch((error) => {
@@ -63,6 +71,7 @@ const Login: React.FC = () => {
                 // Adicione aqui o tratamento de erros
             });
     }
+    
 
     return (
         <div className="flex min-h-screen">

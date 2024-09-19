@@ -49,26 +49,26 @@ router.post('/tasks', async (req, res) => {
   }
 });
 
-// Nova rota para obter o papel do usuário
-router.get('/userRole', async (req, res) => {
-  const token = req.headers.authorization?.split(' ')[1];
-  if (!token) {
-    return res.status(401).send('Token is required');
+router.post('/userRole', async (req, res) => {
+  // Verifica se o nome de usuário foi passado no corpo da requisição
+  const { email } = req.body;
+  console.log(`email recebido: ${email}`)
+  if (!email) {
+    return res.status(400).send('email is required');
   }
 
   try {
-    const decoded: any = verifyToken(token);
-    if (!decoded) {
-      return res.status(401).send('Invalid token');
-    }
-
+    // Conexão com o banco de dados
     const db = getDB();
-    const user = await db.collection('users').findOne({ _id: new ObjectId(decoded.id) });
+
+    // Busca o usuário pelo nome de usuário no banco de dados
+    const user = await db.collection('users').findOne({ email });
 
     if (!user) {
       return res.status(404).send('User not found');
     }
 
+    // Retorna o papel do usuário
     res.send({ role: user.role });
   } catch (err: any) {
     res.status(500).send(err.message);

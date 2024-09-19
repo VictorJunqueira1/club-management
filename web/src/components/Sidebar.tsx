@@ -3,13 +3,14 @@ import { Users, LayoutDashboard, X, Menu, Album, Calendar } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-const fetchUserRole = async () => {
+const fetchUserRole = async (email: string) => {
     try {
         const response = await fetch("http://localhost:3000/userRole", {
-            method: "GET",
+            method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
+            body: JSON.stringify({ email }), // Envia o email no corpo da requisição
             credentials: "include", // Inclui cookies na requisição, se necessário
         });
 
@@ -30,15 +31,26 @@ const Aside: React.FC = () => {
     const { pathname } = router;
     const [isSheetOpen, setIsSheetOpen] = useState(false);
     const [userRole, setUserRole] = useState<"director" | "viewer">('viewer'); // Define 'viewer' como padrão
+    const [email, setEmail] = useState<string | null>(null); // Estado para armazenar o email
+
+    useEffect(() => {
+        // Função para buscar o email do localStorage
+        const storedEmail = localStorage.getItem('email');
+        if (storedEmail) {
+            setEmail(storedEmail);
+        }
+    }, []);
 
     useEffect(() => {
         const getRole = async () => {
-            const role = await fetchUserRole();
-            setUserRole(role);
+            if (email) {
+                const role = await fetchUserRole(email);
+                setUserRole(role);
+            }
         };
 
         getRole();
-    }, []);
+    }, [email]);
 
     const toggleSheet = () => {
         setIsSheetOpen(!isSheetOpen);
@@ -71,7 +83,7 @@ const Aside: React.FC = () => {
                         </li>
                         {userRole === 'director' && (
                             <li className='hover:scale-105 duration-300'>
-                                <Link href="/modules/events" className={`flex items-center p-3 rounded-md transition-colors hover:bg-blue-100 ${pathname === '/events' ? 'bg-blue-200 text-black' : 'text-black'}`}>
+                                <Link href="/modules/events" className={`flex items-center p-3 rounded-md transition-colors hover:bg-blue-100 ${pathname === '/modules/events' ? 'bg-blue-200 text-black' : 'text-black'}`}>
                                     <Calendar className="w-6 h-6 mr-3 text-blue-500" />
                                     <span className="text-lg font-medium">Eventos</span>
                                 </Link>
@@ -116,7 +128,7 @@ const Aside: React.FC = () => {
                         </li>
                         {userRole === 'director' && (
                             <li className='hover:scale-105 transform transition-transform duration-300'>
-                                <Link href="/modules/events" className={`flex items-center p-3 rounded-md transition-colors hover:bg-blue-100 ${pathname === '/events' ? 'bg-blue-200 text-black' : 'text-black'}`}>
+                                <Link href="/modules/events" className={`flex items-center p-3 rounded-md transition-colors hover:bg-blue-100 ${pathname === '/modules/events' ? 'bg-blue-200 text-black' : 'text-black'}`}>
                                     <Calendar className="w-6 h-6 mr-3 text-blue-500" />
                                     <span className="text-lg font-medium">Eventos</span>
                                 </Link>
