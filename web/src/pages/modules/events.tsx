@@ -111,17 +111,22 @@ const Events = () => {
                 },
                 body: JSON.stringify(data),
             });
-
+    
+            const responseText = await response.text(); // Obtenha a resposta como texto
+            console.log('Resposta do servidor:', responseText); // Log da resposta
+    
             if (!response.ok) {
-                throw new Error('Erro ao salvar os dados');
+                throw new Error('Erro ao salvar os dados: ' + responseText);
             }
-
-            const result = await response.json();
+    
+            const result = JSON.parse(responseText); // Tenta converter a resposta para JSON
             console.log('Dados salvos com sucesso:', result);
         } catch (error) {
             console.error('Erro ao enviar os dados:', error);
         }
     };
+    
+
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();

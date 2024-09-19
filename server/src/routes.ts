@@ -109,8 +109,8 @@ router.post('/unidades', async (req, res) => {
     idade,
     genero,
     responsavel,
-    conselheiros: conselheiros ? conselheiros.split(',') : [],
-    auxiliares: auxiliares ? auxiliares.split(',') : []
+    conselheiros: conselheiros ? conselheiros.map((conselheiro: string) => conselheiro.split(",")) : [],
+    auxiliares: auxiliares ?  auxiliares.map((auxiliar: string) => auxiliar.split(",")) : []
   };
 
   try {
