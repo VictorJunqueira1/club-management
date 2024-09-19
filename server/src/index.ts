@@ -10,7 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const corsOptions = {
-  origin: 'http://localhost:3001', // Permita requisições deste domínio
+  origin: 'http://localhost:3000', // Permita requisições deste domínio
   credentials: true
 }
 

@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 
 const fetchUserRole = async (email: string) => {
     try {
-        const response = await fetch("http://localhost:3000/userRole", {
+        const response = await fetch("http://localhost:8000/userRole", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

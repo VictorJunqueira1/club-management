@@ -23,7 +23,7 @@ const Home = () => {
         // Função para buscar o papel do usuário do backend
         const fetchUserRole = async (email: string) => {
             try {
-                const response = await fetch("http://localhost:3000/userRole", {
+                const response = await fetch("http://localhost:8000/userRole", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

@@ -101,10 +101,33 @@ const Events = () => {
         });
     };
 
+    // Função para salvar dados no servidor
+    const saveData = async (data: FormData) => {
+        try {
+            const response = await fetch('http://localhost:8000/unidades', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (!response.ok) {
+                throw new Error('Erro ao salvar os dados');
+            }
+
+            const result = await response.json();
+            console.log('Dados salvos com sucesso:', result);
+        } catch (error) {
+            console.error('Erro ao enviar os dados:', error);
+        }
+    };
+
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log('Form Data:', formData);
-        // Adicione aqui a lógica para salvar os dados do formulário
+        if (formData) {
+            saveData(formData); // Chame a função saveData passando os dados do formulário
+        }
     };
 
     return (
@@ -135,253 +158,55 @@ const Events = () => {
                             onClick={() => setActiveTab('eventos')}
                             className={`py-2 px-4 text-lg font-medium rounded-t-lg ${activeTab === 'eventos' ? 'bg-blue-100 text-blue-600' : 'text-gray-600 hover:bg-blue-50'}`}
                         >
-                            Encontros
+                            Eventos
                         </button>
                     </nav>
                 </div>
 
-                {/* Tabs Content */}
-                <div className="pt-6">
-                    {activeTab === 'unidades' && (
-                        <div>
-                            <h2 className="text-2xl font-semibold mb-4">Criar ou Modificar Unidades</h2>
-                            {/* Seletor para Unidades */}
-                            <div className="mb-4">
-                                <label className="block text-gray-700">Selecionar Unidade</label>
-                                <select
-                                    value={selectedItem}
-                                    onChange={handleSelectChange}
-                                    className="mt-1 p-2 border border-gray-300 rounded-lg w-full"
-                                >
-                                    <option value="">Selecione uma Unidade</option>
-                                    {unidades.map(u => (
-                                        <option key={u.nome_unidade} value={u.nome_unidade}>{u.nome_unidade}</option>
-                                    ))}
-                                </select>
-                            </div>
-                            {/* Formulário para Unidades */}
-                            {formData && 'nome_unidade' in formData && (
-                                <form onSubmit={handleSubmit} className="space-y-4">
-                                    <div>
-                                        <label className="block text-gray-700">Nome da Unidade</label>
-                                        <input
-                                            type="text"
-                                            name="nome_unidade"
-                                            value={formData.nome_unidade || ''}
-                                            onChange={handleChange}
-                                            className="mt-1 p-2 border border-gray-300 rounded-lg w-full"
-                                            placeholder="Nome da Unidade"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="block text-gray-700">Idade</label>
-                                        <input
-                                            type="text"
-                                            name="idade"
-                                            value={formData.idade || ''}
-                                            onChange={handleChange}
-                                            className="mt-1 p-2 border border-gray-300 rounded-lg w-full"
-                                            placeholder="Idade"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="block text-gray-700">Gênero</label>
-                                        <input
-                                            type="text"
-                                            name="gênero"
-                                            value={formData.gênero || ''}
-                                            onChange={handleChange}
-                                            className="mt-1 p-2 border border-gray-300 rounded-lg w-full"
-                                            placeholder="Gênero"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="block text-gray-700">Responsável</label>
-                                        <input
-                                            type="text"
-                                            name="responsável"
-                                            value={formData.responsável || ''}
-                                            onChange={handleChange}
-                                            className="mt-1 p-2 border border-gray-300 rounded-lg w-full"
-                                            placeholder="Responsável"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="block text-gray-700">Conselheiros (separados por vírgula)</label>
-                                        <input
-                                            type="text"
-                                            name="conselheiros"
-                                            value={(formData?.conselheiros || []).join(', ')}
-                                            onChange={handleChange}
-                                            className="mt-1 p-2 border border-gray-300 rounded-lg w-full"
-                                            placeholder="Conselheiros"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="block text-gray-700">Auxiliares (separados por vírgula)</label>
-                                        <input
-                                            type="text"
-                                            name="auxiliares"
-                                            value={(formData?.auxiliares || []).join(', ')}
-                                            onChange={handleChange}
-                                            className="mt-1 p-2 border border-gray-300 rounded-lg w-full"
-                                            placeholder="Auxiliares"
-                                        />
-                                    </div>
-                                    <button type="submit" className="py-2 px-4 bg-blue-500 text-white rounded-lg">Salvar Unidade</button>
-                                </form>
-                            )}
+                {/* Formulário */}
+                <form onSubmit={handleSubmit}>
+                    {/* Conteúdo específico da aba */}
+                    <div className="mb-4">
+                        <label htmlFor="itemSelect" className="block text-sm font-medium text-gray-700 mb-2">
+                            Selecione um item
+                        </label>
+                        <select id="itemSelect" value={selectedItem} onChange={handleSelectChange} className="block w-full px-4 py-2 border rounded-lg">
+                            <option value="">Selecione</option>
+                            {activeTab === 'unidades' && unidades.map((unidade) => (
+                                <option key={unidade.nome_unidade} value={unidade.nome_unidade}>{unidade.nome_unidade}</option>
+                            ))}
+                            {activeTab === 'classes' && classes.map((classe) => (
+                                <option key={classe.classe} value={classe.classe}>{classe.classe}</option>
+                            ))}
+                            {activeTab === 'eventos' && eventos.map((evento) => (
+                                <option key={evento.title} value={evento.title}>{evento.title}</option>
+                            ))}
+                        </select>
+                    </div>
+
+                    {/* Campos baseados no item selecionado */}
+                    {formData && (
+                        <div className="mb-4">
+                            {Object.entries(formData).map(([key, value]) => (
+                                <div key={key} className="mb-2">
+                                    <label htmlFor={key} className="block text-sm font-medium text-gray-700 capitalize">{key}</label>
+                                    <input
+                                        id={key}
+                                        name={key}
+                                        value={Array.isArray(value) ? value.join(', ') : value}
+                                        onChange={handleChange}
+                                        className="block w-full px-4 py-2 border rounded-lg"
+                                    />
+                                </div>
+                            ))}
                         </div>
                     )}
 
-                    {activeTab === 'classes' && (
-                        <div>
-                            <h2 className="text-2xl font-semibold mb-4">Criar ou Modificar Classes</h2>
-                            {/* Seletor para Classes */}
-                            <div className="mb-4">
-                                <label className="block text-gray-700">Selecionar Classe</label>
-                                <select
-                                    value={selectedItem}
-                                    onChange={handleSelectChange}
-                                    className="mt-1 p-2 border border-gray-300 rounded-lg w-full"
-                                >
-                                    <option value="">Selecione uma Classe</option>
-                                    {classes.map(c => (
-                                        <option key={c.classe} value={c.classe}>{c.classe}</option>
-                                    ))}
-                                </select>
-                            </div>
-                            {/* Formulário para Classes */}
-                            {formData && 'classe' in formData && (
-                                <form onSubmit={handleSubmit} className="space-y-4">
-                                    <div>
-                                        <label className="block text-gray-700">Classe</label>
-                                        <input
-                                            type="text"
-                                            name="classe"
-                                            value={formData.classe || ''}
-                                            onChange={handleChange}
-                                            className="mt-1 p-2 border border-gray-300 rounded-lg w-full"
-                                            placeholder="Classe"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="block text-gray-700">Responsável</label>
-                                        <input
-                                            type="text"
-                                            name="responsavel"
-                                            value={formData.responsável || ''}
-                                            onChange={handleChange}
-                                            className="mt-1 p-2 border border-gray-300 rounded-lg w-full"
-                                            placeholder="Responsável"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="block text-gray-700">Instrutores (separados por vírgula)</label>
-                                        <input
-                                            type="text"
-                                            name="instrutores"
-                                            value={(formData.instrutores || []).join(', ')}
-                                            onChange={handleChange}
-                                            className="mt-1 p-2 border border-gray-300 rounded-lg w-full"
-                                            placeholder="Instrutores"
-                                        />
-                                    </div>
-                                    <button type="submit" className="py-2 px-4 bg-blue-500 text-white rounded-lg">Salvar Classe</button>
-                                </form>
-                            )}
-                        </div>
-                    )}
-
-                    {activeTab === 'eventos' && (
-                        <div>
-                            <h2 className="text-2xl font-semibold mb-4">Criar ou Modificar Encontros</h2>
-                            {/* Seletor para Encontros */}
-                            <div className="mb-4">
-                                <label className="block text-gray-700">Selecionar Encontro</label>
-                                <select
-                                    value={selectedItem}
-                                    onChange={handleSelectChange}
-                                    className="mt-1 p-2 border border-gray-300 rounded-lg w-full"
-                                >
-                                    <option value="">Selecione um Encontro</option>
-                                    {eventos.map(e => (
-                                        <option key={e.title} value={e.title}>{e.title}</option>
-                                    ))}
-                                </select>
-                            </div>
-                            {/* Formulário para Encontros */}
-                            {formData && 'date' in formData && (
-                                <form onSubmit={handleSubmit} className="space-y-4">
-                                    <div>
-                                        <label className="block text-gray-700">Data</label>
-                                        <input
-                                            type="date"
-                                            name="date"
-                                            value={formData.date || ''}
-                                            onChange={handleChange}
-                                            className="mt-1 p-2 border border-gray-300 rounded-lg w-full"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="block text-gray-700">Hora</label>
-                                        <input
-                                            type="time"
-                                            name="time"
-                                            value={formData.time || ''}
-                                            onChange={handleChange}
-                                            className="mt-1 p-2 border border-gray-300 rounded-lg w-full"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="block text-gray-700">Local</label>
-                                        <input
-                                            type="text"
-                                            name="location"
-                                            value={formData.location || ''}
-                                            onChange={handleChange}
-                                            className="mt-1 p-2 border border-gray-300 rounded-lg w-full"
-                                            placeholder="Local"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="block text-gray-700">Título</label>
-                                        <input
-                                            type="text"
-                                            name="title"
-                                            value={formData.title || ''}
-                                            onChange={handleChange}
-                                            className="mt-1 p-2 border border-gray-300 rounded-lg w-full"
-                                            placeholder="Título"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="block text-gray-700">Descrição</label>
-                                        <textarea
-                                            name="description"
-                                            value={formData.description || ''}
-                                            onChange={handleChange}
-                                            className="mt-1 p-2 border border-gray-300 rounded-lg w-full"
-                                            placeholder="Descrição"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="block text-gray-700">Dia Oficial</label>
-                                        <input
-                                            type="text"
-                                            name="officialDay"
-                                            value={formData.officialDay || ''}
-                                            onChange={handleChange}
-                                            className="mt-1 p-2 border border-gray-300 rounded-lg w-full"
-                                            placeholder="Dia Oficial"
-                                        />
-                                    </div>
-                                    <button type="submit" className="py-2 px-4 bg-blue-500 text-white rounded-lg">Salvar Encontro</button>
-                                </form>
-                            )}
-                        </div>
-                    )}
-                </div>
+                    {/* Botão de envio */}
+                    <button type="submit" className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700">
+                        Salvar
+                    </button>
+                </form>
             </main>
         </div>
     );

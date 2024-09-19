@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { findUserByEmail, isDirector } from './user';
+import { findUserByEmail, isDirector } from './models/user';
 import { generateToken, comparePassword, verifyToken, hashPassword } from './auth'; // Adicione hashPassword aqui
 import { ObjectId } from 'mongodb';
 import { getDB } from './config/config';
@@ -98,5 +98,40 @@ router.post('/register', async (req, res) => {
   await db.collection('users').insertOne(newUser);
   res.status(201).send('User created successfully');
 });
+
+// Rota para salvar os dados da unidade
+router.post('/unidades', async (req, res) => {
+  const { nomeUnidade, idade, genero, responsavel, conselheiros, auxiliares } = req.body;
+
+  const db = getDB();
+  const novaUnidade = {
+    nomeUnidade,
+    idade,
+    genero,
+    responsavel,
+    conselheiros: conselheiros ? conselheiros.split(',') : [],
+    auxiliares: auxiliares ? auxiliares.split(',') : []
+  };
+
+  try {
+    await db.collection('unidades').insertOne(novaUnidade);
+    res.status(201).send('Unidade criada com sucesso');
+  } catch (err: any) {
+    res.status(500).send('Erro ao salvar a unidade');
+  }
+});
+
+// Rota para buscar todas as unidades
+router.get('/unidades', async (req, res) => {
+  const db = getDB();
+
+  try {
+    const unidades = await db.collection('unidades').find().toArray();
+    res.status(200).json(unidades);
+  } catch (err: any) {
+    res.status(500).send('Erro ao buscar unidades');
+  }
+});
+
 
 export default router;
