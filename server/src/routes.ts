@@ -1,15 +1,16 @@
 import { Router } from 'express';
-import { findUserByUsername, isDirector } from './user';
-import { generateToken, comparePassword, verifyToken } from './auth';
+import { findUserByEmail, isDirector } from './user';
+import { generateToken, comparePassword, verifyToken, hashPassword } from './auth'; // Adicione hashPassword aqui
 import { ObjectId } from 'mongodb';
 import { getDB } from './config/config';
+import cors from 'cors';
 
 const router = Router();
 
 // Rota de login
 router.post('/login', async (req, res) => {
-  const { username, password } = req.body;
-  const user = await findUserByUsername(username);
+  const { email, password } = req.body;
+  const user = await findUserByEmail(email);
 
   if (!user) {
     return res.status(404).send('User not found');
@@ -61,7 +62,6 @@ router.get('/userRole', async (req, res) => {
       return res.status(401).send('Invalid token');
     }
 
-    // Assume que o token decodificado contém o ID do usuário
     const db = getDB();
     const user = await db.collection('users').findOne({ _id: new ObjectId(decoded.id) });
 
@@ -69,11 +69,34 @@ router.get('/userRole', async (req, res) => {
       return res.status(404).send('User not found');
     }
 
-    // Retorna o papel do usuário
     res.send({ role: user.role });
   } catch (err: any) {
     res.status(500).send(err.message);
   }
+});
+
+// Rota de criação de usuários
+router.post('/register', async (req, res) => {
+  const { email, password, role } = req.body;
+
+  // Verifica se o usuário já existe
+  const existingUser = await findUserByEmail(email);
+  if (existingUser) {
+    return res.status(400).send('User already exists');
+  }
+
+  // Gera o hash da senha
+  const hashedPassword = await hashPassword(password);
+
+  const db = getDB();
+  const newUser = {
+    email,
+    password: hashedPassword,
+    role, // Você pode definir um papel padrão aqui, se desejar
+  };
+
+  await db.collection('users').insertOne(newUser);
+  res.status(201).send('User created successfully');
 });
 
 export default router;

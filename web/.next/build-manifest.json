@@ -35,11 +35,6 @@
       "static/chunks/main.js",
       "static/chunks/pages/auth/login.js"
     ],
-    "/modules/events": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/modules/events.js"
-    ],
     "/modules/instructors": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",

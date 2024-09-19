@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/select";
 
 const formSchema = z.object({
-    username: z.string().email("Email inválido").min(2, "Email é obrigatório"),
+    email: z.string().email("Email inválido").min(2, "Email é obrigatório"),
     password: z.string().min(6, "Senha deve ter pelo menos 6 caracteres"),
     role: z.string().min(1, "Papel é obrigatório")
 });
@@ -31,7 +31,7 @@ const Login: React.FC = () => {
     const form = useForm<FormSchemaType>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            username: "",
+            email: "",
             password: "",
             role: ""
         },
@@ -82,7 +82,7 @@ const Login: React.FC = () => {
                         <div className="space-y-3">
                             <FormField
                                 control={form.control}
-                                name="username"
+                                name="email"
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>Email</FormLabel>
