@@ -52,7 +52,7 @@ router.post('/tasks', async (req, res) => {
 router.post('/userRole', async (req, res) => {
   // Verifica se o nome de usuário foi passado no corpo da requisição
   const { email } = req.body;
-  console.log(`email recebido: ${email}`)
+
   if (!email) {
     return res.status(400).send('email is required');
   }
